@@ -1,0 +1,7 @@
+--1st output
+
+The median element is: 3
+
+--2nd output
+
+The median element is: 432
