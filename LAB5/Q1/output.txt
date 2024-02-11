@@ -1,0 +1,7 @@
+--1st output
+
+8
+
+--2nd output
+
+6

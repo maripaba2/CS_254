@@ -1,0 +1,7 @@
+--1st output
+
+Graph can be divided into two cliques.
+
+--2nd output
+
+Graph cannot be divided into two cliques.

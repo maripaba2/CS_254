@@ -1,0 +1,7 @@
+--1st output
+
+1
+
+--2nd output
+
+4
