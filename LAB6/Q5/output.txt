@@ -1,0 +1,3 @@
+--1st output
+
+Articulation Points: 0 3
