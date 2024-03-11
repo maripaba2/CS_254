@@ -1,59 +1,62 @@
-  vector<int> topological_sorting(vector<vector<int>> graph) {
-    vector <int> indegree(graph.size(), 0);
-    queue<int> q;
-    vector<int> solution;
-    
-    for(int i = 0; i < graph.size(); i++) {
-        for(int j = 0; j < graph[i].size(); j++)
-        { 
-        //iterate over all edges
-            indegree[ graph[i][j] ]++;
-        }
-    }
-    
-    //enqueue all nodes with indegree 0
-    for(int i = 0; i < graph.size(); i++) 
-    {
-        if(indegree[i] == 0) {
-            q.push(i);
-        }
-    }
+#include <bits/stdc++.h>
+using namespace std;
 
-    //remove one node after the other
-    while(q.size() > 0) {
-        int currentNode = q.front();
-        q.pop();
-        solution.push_back(currentNode);
-        for(int j = 0; j < graph[currentNode].size(); j++)
-        { 
-        //remove all edges
-            int newNode = graph[currentNode][j];
-            indegree[newNode]--;
-            if(indegree[newNode] == 0) 
-            { 
-            //target node has now no more incoming edges
-                q.push(newNode);
-            }
-        }
-    }
-    
-    return solution;
+vector<int> topologicalSort(vector<vector<int> >& adj,int V)
+{
+
+	vector<int> indegree(V);
+	for (int i = 0; i < V; i++) {
+		for (auto it : adj[i]) {
+			indegree[it]++;
+		}
+	}
+
+	queue<int> q;
+	for (int i = 0; i < V; i++) {
+		if (indegree[i] == 0) {
+			q.push(i);
+		}
+	}
+	vector<int> result;
+	while (!q.empty()) {
+		int node = q.front();
+		q.pop();
+		result.push_back(node);
+	
+		for (auto it : adj[node]) {
+			indegree[it]--;
+		
+			if (indegree[it] == 0)
+				q.push(it);
+		}
+	}
+	if (result.size() != V) {
+		cout << "Graph contains cycle!" << endl;
+		return {};
+	}
+
+	return result;
 }
-int main() 
-{ 
-	
-	int n,v1,v2;
-	cin>>n;
-	vector<vector<int>> graph;
-	for(int i=1;i<=n;i++)
-        {
-            cin>>v1>>v2;
-	    g.addEdge(v1, v2);
-        } 
-	
 
-	cout << " Topological Sort of the given graph \n"; 
-	g.topologicalSort(); 
+int main()
+{
+	int n = 4;
+	vector<vector<int> > edges
+		= { { 0, 1 }, { 1, 2 }, { 3, 1 }, { 3, 2 } };
+	vector<vector<int> > adj(n);
 
-	return 0; 
+
+	for (auto i : edges) {
+		adj[i[0]].push_back(i[1]);
+	}
+
+	cout << "Topological sorting of the graph: ";
+	vector<int> result = topologicalSort(adj, n);
+
+
+	for (auto i : result) {
+		cout << i << " ";
+	}
+
+	return 0;
 }
